@@ -110,6 +110,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="datePicker" destination="7AG-lz-PyM" id="9mI-qg-qAS"/>
+                        <outlet property="descriptionLabel" destination="Xwd-jt-LVd" id="ixs-yd-Eiz"/>
+                        <outlet property="taskLabel" destination="rtw-Hr-S69" id="VhW-CV-ui6"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dWP-3b-Q5N" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -10,9 +10,17 @@ import UIKit
 
 class TaskDetailViewController: UIViewController {
     
+    @IBOutlet weak var taskLabel: UITextField!
+    @IBOutlet weak var descriptionLabel: UITextField!
+    @IBOutlet weak var datePicker: UIDatePicker!
+    var taskModel:TaskModel = TaskModel(task: "", subTask: "", date: NSDate())
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        taskLabel.text = taskModel.task
+        descriptionLabel.text = taskModel.subTask
+        datePicker.date = taskModel.date
     }
     
     override func didReceiveMemoryWarning() {
