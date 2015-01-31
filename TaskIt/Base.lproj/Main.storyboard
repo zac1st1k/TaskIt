@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Task It-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="TaskIt" customModuleProvider="target" sceneMemberID="viewController">
@@ -67,7 +67,7 @@
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="fmo-kz-RZJ" secondAttribute="bottom" id="ZeQ-61-LOq"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="k8T-Cf-MWX"/>
+                    <navigationItem key="navigationItem" title="Task It" id="k8T-Cf-MWX"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
                         <outlet property="tableView" destination="fmo-kz-RZJ" id="JPi-ua-Hm3"/>
