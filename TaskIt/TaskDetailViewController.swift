@@ -33,8 +33,8 @@ class TaskDetailViewController: UIViewController {
         navigationController?.popViewControllerAnimated(true)
     }
     @IBAction func doneBarButtonItemPressed(sender: UIBarButtonItem) {
-        var task = TaskModel(task: taskLabel.text, subTask: descriptionLabel.text, date: datePicker.date, isCompleted: taskModel.isCompleted)
-        mainVC.taskArray[mainVC.tableView.indexPathForSelectedRow()!.row] = task
+        var task = TaskModel(task: taskLabel.text, subTask: descriptionLabel.text, date: datePicker.date, isCompleted: false)
+        mainVC.baseArray[0][mainVC.tableView.indexPathForSelectedRow()!.row] = task
         navigationController?.popViewControllerAnimated(true)
 
     }

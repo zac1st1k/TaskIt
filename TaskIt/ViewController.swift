@@ -38,7 +38,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 //        }
 //        taskArray = taskArray.sorted(sortByDate)
         
-        taskArray = taskArray.sorted({ (taskOne:TaskModel, taskTwo:TaskModel) -> Bool in
+        baseArray[0] = baseArray[0].sorted({ (taskOne:TaskModel, taskTwo:TaskModel) -> Bool in
             return taskOne.date.timeIntervalSince1970 < taskTwo.date.timeIntervalSince1970
 //            return countElements(taskOne.task) > countElements(taskTwo.task)
         })
@@ -83,26 +83,58 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         cell.taskLabel.text = baseArray[indexPath.section][indexPath.row].task
         cell.descriptionLabel.text = baseArray[indexPath.section][indexPath.row].subTask
         cell.dateLabel.text = Date.toString(baseArray[indexPath.section][indexPath.row].date)
+        if baseArray[indexPath.section][indexPath.row].isCompleted == true {
+            cell.accessoryType = UITableViewCellAccessoryType.Checkmark
+        }
         return cell
     }
     func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
         performSegueWithIdentifier("showTaskDetail", sender: indexPath)
     }
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 && baseArray[0].count != 0 {
+            return "To Do Tasks"
+        }
+        else if section == 1 && baseArray[1].count != 0 {
+            return "Completed Tasks"
+        }
+        else {
+            return nil
+        }
+    }
     //    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
     //        return CGFloat(44)
     //    }
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == 0 {
-            return "Uncompleted Tasks"
-        }
-        else {
-            return "Completed Tasks"
-        }
-    }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 44
     }
+    
+//    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        return 25
+//    }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        let thisTask = baseArray[indexPath.section][indexPath.row]
+        var newTask = TaskModel(task: thisTask.task, subTask: thisTask.subTask, date: thisTask.date, isCompleted: !thisTask.isCompleted)
+        baseArray[indexPath.section].removeAtIndex(indexPath.row)
+        baseArray[abs(indexPath.section - 1)].append(newTask)
+        tableView.reloadData()
+    }
+    
+    func tableView(tableView: UITableView, titleForDeleteConfirmationButtonForRowAtIndexPath indexPath: NSIndexPath) -> String! {
+        if indexPath.section == 0 {
+            return "Mark as Completed"
+        }
+        else {
+            return "Mark as Uncompleted"
+        }
+    }
+    
+    func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {
+        println("AccessoryButtonTapped")
+    }
+    
     @IBAction func addTaskBarButtonItemPressed(sender: UIBarButtonItem) {
         self.performSegueWithIdentifier("showTaskAdd", sender: self)
     }
