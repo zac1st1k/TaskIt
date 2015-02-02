@@ -27,6 +27,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         taskArray = [task1, task2, TaskModel(task: "Gym", subTask: "Leg Day", date: Date.from(2014, month: 12, day: 1))]
     }
     
+    override func viewWillAppear(animated: Bool) {
+        tableView.reloadData()
+        //        if tableView.indexPathForSelectedRow() != nil {
+        //            tableView.deselectRowAtIndexPath(tableView.indexPathForSelectedRow()!, animated: true)
+        //        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -36,9 +43,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         if segue.identifier == "showTaskDetail" {
             let TaskDetailVC:TaskDetailViewController = segue.destinationViewController as TaskDetailViewController
-//            let indexPath = sender as NSIndexPath
+            //            let indexPath = sender as NSIndexPath
             let indexPath = tableView.indexPathForSelectedRow()
-            println(indexPath!.row)
             TaskDetailVC.taskModel = taskArray[indexPath!.row]
         }
     }
@@ -61,11 +67,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
         performSegueWithIdentifier("showTaskDetail", sender: indexPath)
     }
-//    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-//        return CGFloat(44)
-//    }
+    //    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    //        return CGFloat(44)
+    //    }
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 44
     }
+    @IBAction func addTaskBarButtonItemPressed(sender: UIBarButtonItem) {
+        self.performSegueWithIdentifier("showTaskAdd", sender: self)
+    }
+
 }
 

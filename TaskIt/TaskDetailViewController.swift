@@ -27,4 +27,10 @@ class TaskDetailViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    @IBAction func cancelBarButtonItemPressed(sender: UIBarButtonItem) {
+        navigationController?.popViewControllerAnimated(true)
+    }
+    @IBAction func doneBarButtonItemPressed(sender: UIBarButtonItem) {
+
+    }
 }

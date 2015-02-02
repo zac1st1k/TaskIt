@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <scenes>
-        <!--Task It-->
+        <!--Tasks-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="TaskIt" customModuleProvider="target" sceneMemberID="viewController">
@@ -20,7 +20,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="myCell" id="Hs5-YW-F0f" customClass="TaskCell" customModule="TaskIt" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="myCell" id="Hs5-YW-F0f" customClass="TaskCell" customModule="TaskIt" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Hs5-YW-F0f" id="YFz-aH-QtN">
@@ -68,7 +68,14 @@
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="fmo-kz-RZJ" secondAttribute="bottom" id="ZeQ-61-LOq"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Task It" id="k8T-Cf-MWX"/>
+                    <navigationItem key="navigationItem" title="Tasks" id="k8T-Cf-MWX">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="hUX-oi-ipm">
+                            <connections>
+                                <action selector="addTaskBarButtonItemPressed:" destination="BYZ-38-t0r" id="SdB-Bu-8DA"/>
+                                <segue destination="dGO-KI-dpl" kind="presentation" identifier="showTaskAdd" id="0lr-8l-gCx"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="tableView" destination="fmo-kz-RZJ" id="JPi-ua-Hm3"/>
@@ -78,10 +85,10 @@
             </objects>
             <point key="canvasLocation" x="318" y="436"/>
         </scene>
-        <!--Task Detail View Controller-->
+        <!--Task Detail-->
         <scene sceneID="cbF-cc-D7c">
             <objects>
-                <viewController id="hf3-B9-rKm" customClass="TaskDetailViewController" customModule="TaskIt" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Task Detail" id="hf3-B9-rKm" customClass="TaskDetailViewController" customModule="TaskIt" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="eIU-ft-w1e"/>
                         <viewControllerLayoutGuide type="bottom" id="43R-yR-AcW"/>
@@ -91,24 +98,38 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rtw-Hr-S69">
-                                <rect key="frame" x="27" y="94" width="97" height="30"/>
+                                <rect key="frame" x="16" y="102" width="288" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Xwd-jt-LVd">
-                                <rect key="frame" x="27" y="145" width="97" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="7AG-lz-PyM">
-                                <rect key="frame" x="0.0" y="192" width="320" height="162"/>
+                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="7AG-lz-PyM">
+                                <rect key="frame" x="0.0" y="202" width="320" height="162"/>
                                 <date key="date" timeIntervalSinceReferenceDate="444395455.02604002">
                                     <!--2015-01-31 11:10:55 +0000-->
                                 </date>
                             </datePicker>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Xwd-jt-LVd">
+                                <rect key="frame" x="16" y="153" width="288" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Detail" id="8Ss-M2-NzB">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="GCh-33-YZa">
+                            <connections>
+                                <action selector="cancelBarButtonItemPressed:" destination="hf3-B9-rKm" id="qpp-zh-C0N"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="1Bj-dq-kk5">
+                            <connections>
+                                <action selector="doneBarButtonItemPressed:" destination="hf3-B9-rKm" id="lMK-Os-ezw"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="datePicker" destination="7AG-lz-PyM" id="9mI-qg-qAS"/>
@@ -118,7 +139,62 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dWP-3b-Q5N" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="733" y="436"/>
+            <point key="canvasLocation" x="781" y="837"/>
+        </scene>
+        <!--Add Task-->
+        <scene sceneID="opz-t4-2PH">
+            <objects>
+                <viewController title="Add Task" id="dGO-KI-dpl" customClass="AddTaskViewController" customModule="TaskIt" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="MM9-2M-1QT"/>
+                        <viewControllerLayoutGuide type="bottom" id="M3K-Zm-g3k"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="fD5-8A-VA0">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Task" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="umQ-1l-XKe">
+                                <rect key="frame" x="16" y="100" width="288" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bcI-WI-yMl">
+                                <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                                <items>
+                                    <barButtonItem systemItem="cancel" id="eOb-m4-UbG">
+                                        <connections>
+                                            <action selector="cancelBarButtonItemPressed:" destination="dGO-KI-dpl" id="ss1-FO-uYg"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="3ZH-eJ-ibM"/>
+                                    <barButtonItem systemItem="save" id="S7i-9f-fAy">
+                                        <connections>
+                                            <action selector="saveBarButtonItemPressed:" destination="dGO-KI-dpl" id="FDV-BZ-1ul"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="m7v-NM-eKm">
+                                <rect key="frame" x="0.0" y="200" width="320" height="162"/>
+                                <date key="date" timeIntervalSinceReferenceDate="444395455.02604002">
+                                    <!--2015-01-31 11:10:55 +0000-->
+                                </date>
+                            </datePicker>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Subtask" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9EI-dL-Haa">
+                                <rect key="frame" x="16" y="151" width="288" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bPC-iv-TZY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="781" y="185"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="obg-hy-sDJ">
