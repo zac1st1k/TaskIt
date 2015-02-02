@@ -47,6 +47,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             let indexPath = tableView.indexPathForSelectedRow()
             TaskDetailVC.taskModel = taskArray[indexPath!.row]
         }
+        else if segue.identifier == "showTaskAdd" {
+            let AddTaskVC:AddTaskViewController = segue.destinationViewController as AddTaskViewController
+            AddTaskVC.mainVC = self
+        }
     }
     
     // UITableView Delegate Methods
