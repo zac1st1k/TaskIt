@@ -22,12 +22,23 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let dateStringFormatter = NSDateFormatter()
         dateStringFormatter.dateFormat = "dd-MM-yyyy"
         
-        let task1 = TaskModel(task: "Study French", subTask: "Verbs", date: Date.from(2014, month: 12, day: 1))
+        let task1 = TaskModel(task: "Study French", subTask: "Verbs", date: Date.from(2014, month: 12, day: 3))
         let task2 = TaskModel(task: "Eat Dinner", subTask: "Burgers", date: Date.from(2014, month: 12, day: 1))
-        taskArray = [task1, task2, TaskModel(task: "Gym", subTask: "Leg Day", date: Date.from(2014, month: 12, day: 1))]
+        taskArray = [task1, task2, TaskModel(task: "Gym", subTask: "Leg Day", date: Date.from(2014, month: 12, day: 2))]
     }
     
     override func viewWillAppear(animated: Bool) {
+        
+//        func sortByDate (taskOne:TaskModel, tasktwo: TaskModel) -> Bool {
+//            return taskOne.date.timeIntervalSince1970 < tasktwo.date.timeIntervalSince1970
+//        }
+//        taskArray = taskArray.sorted(sortByDate)
+        
+        taskArray = taskArray.sorted({ (taskOne:TaskModel, taskTwo:TaskModel) -> Bool in
+            return taskOne.date.timeIntervalSince1970 < taskTwo.date.timeIntervalSince1970
+//            return countElements(taskOne.task) > countElements(taskTwo.task)
+        })
+        
         tableView.reloadData()
         //        if tableView.indexPathForSelectedRow() != nil {
         //            tableView.deselectRowAtIndexPath(tableView.indexPathForSelectedRow()!, animated: true)
@@ -46,6 +57,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             //            let indexPath = sender as NSIndexPath
             let indexPath = tableView.indexPathForSelectedRow()
             TaskDetailVC.taskModel = taskArray[indexPath!.row]
+            TaskDetailVC.mainVC = self
         }
         else if segue.identifier == "showTaskAdd" {
             let AddTaskVC:AddTaskViewController = segue.destinationViewController as AddTaskViewController
