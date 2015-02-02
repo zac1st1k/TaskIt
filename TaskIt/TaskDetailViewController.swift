@@ -15,7 +15,7 @@ class TaskDetailViewController: UIViewController {
     @IBOutlet weak var taskLabel: UITextField!
     @IBOutlet weak var descriptionLabel: UITextField!
     @IBOutlet weak var datePicker: UIDatePicker!
-    var taskModel:TaskModel = TaskModel(task: "", subTask: "", date: NSDate())
+    var taskModel:TaskModel = TaskModel(task: "", subTask: "", date: NSDate(), isCompleted: false)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +33,7 @@ class TaskDetailViewController: UIViewController {
         navigationController?.popViewControllerAnimated(true)
     }
     @IBAction func doneBarButtonItemPressed(sender: UIBarButtonItem) {
-        var task = TaskModel(task: taskLabel.text, subTask: descriptionLabel.text, date: datePicker.date)
+        var task = TaskModel(task: taskLabel.text, subTask: descriptionLabel.text, date: datePicker.date, isCompleted: taskModel.isCompleted)
         mainVC.taskArray[mainVC.tableView.indexPathForSelectedRow()!.row] = task
         navigationController?.popViewControllerAnimated(true)
 

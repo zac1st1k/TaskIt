@@ -12,6 +12,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     @IBOutlet weak var tableView: UITableView!
     var taskArray:[TaskModel] = []
+    var completedArray:[TaskModel] = []
+    var baseArray:[[TaskModel]] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,9 +24,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let dateStringFormatter = NSDateFormatter()
         dateStringFormatter.dateFormat = "dd-MM-yyyy"
         
-        let task1 = TaskModel(task: "Study French", subTask: "Verbs", date: Date.from(2014, month: 12, day: 3))
-        let task2 = TaskModel(task: "Eat Dinner", subTask: "Burgers", date: Date.from(2014, month: 12, day: 1))
-        taskArray = [task1, task2, TaskModel(task: "Gym", subTask: "Leg Day", date: Date.from(2014, month: 12, day: 2))]
+        let task1 = TaskModel(task: "Study French", subTask: "Verbs", date: Date.from(2014, month: 12, day: 3), isCompleted: false)
+        let task2 = TaskModel(task: "Eat Dinner", subTask: "Burgers", date: Date.from(2014, month: 12, day: 1), isCompleted: false)
+        taskArray = [task1, task2, TaskModel(task: "Gym", subTask: "Leg Day", date: Date.from(2014, month: 12, day: 2), isCompleted: false)]
+        completedArray = [TaskModel(task:"Code", subTask:"Task Project", date: Date.from(2014, month: 1, day: 1) ,isCompleted:true)]
+        baseArray = [taskArray, completedArray]
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -55,8 +59,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         if segue.identifier == "showTaskDetail" {
             let TaskDetailVC:TaskDetailViewController = segue.destinationViewController as TaskDetailViewController
             //            let indexPath = sender as NSIndexPath
-            let indexPath = tableView.indexPathForSelectedRow()
-            TaskDetailVC.taskModel = taskArray[indexPath!.row]
+            let indexPath = tableView.indexPathForSelectedRow()!
+            TaskDetailVC.taskModel = baseArray[indexPath.section][indexPath.row]
             TaskDetailVC.mainVC = self
         }
         else if segue.identifier == "showTaskAdd" {
@@ -67,17 +71,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     // UITableView Delegate Methods
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+        return baseArray.count
     }
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return taskArray.count
-        
+        return baseArray[section].count
     }
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell: TaskCell = tableView.dequeueReusableCellWithIdentifier("myCell", forIndexPath: indexPath) as TaskCell
-        cell.taskLabel.text = taskArray[indexPath.row].task
-        cell.descriptionLabel.text = taskArray[indexPath.row].subTask
-        cell.dateLabel.text = Date.toString(taskArray[indexPath.row].date)
+        cell.taskLabel.text = baseArray[indexPath.section][indexPath.row].task
+        cell.descriptionLabel.text = baseArray[indexPath.section][indexPath.row].subTask
+        cell.dateLabel.text = Date.toString(baseArray[indexPath.section][indexPath.row].date)
         return cell
     }
     func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
@@ -86,6 +91,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     //    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
     //        return CGFloat(44)
     //    }
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return "Uncompleted Tasks"
+        }
+        else {
+            return "Completed Tasks"
+        }
+    }
+    
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 44
     }
