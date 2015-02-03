@@ -12,6 +12,7 @@
 		111E92FE1A7CEF2300B79CC0 /* TaskDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111E92FD1A7CEF2300B79CC0 /* TaskDetailViewController.swift */; };
 		118F278A1A7CFED500693884 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118F27891A7CFED500693884 /* Date.swift */; };
 		11A4688D1A7F43D300537835 /* AddTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A4688C1A7F43D200537835 /* AddTaskViewController.swift */; };
+		11D493EB1A80DFDA00341E7D /* TaskItModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 11D493E91A80DFDA00341E7D /* TaskItModel.xcdatamodeld */; };
 		11D8370B1A7CD1AF000C189D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D8370A1A7CD1AF000C189D /* AppDelegate.swift */; };
 		11D8370D1A7CD1AF000C189D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D8370C1A7CD1AF000C189D /* ViewController.swift */; };
 		11D837101A7CD1AF000C189D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11D8370E1A7CD1AF000C189D /* Main.storyboard */; };
@@ -36,6 +37,7 @@
 		111E92FD1A7CEF2300B79CC0 /* TaskDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskDetailViewController.swift; sourceTree = "<group>"; };
 		118F27891A7CFED500693884 /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		11A4688C1A7F43D200537835 /* AddTaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTaskViewController.swift; sourceTree = "<group>"; };
+		11D493EA1A80DFDA00341E7D /* TaskItModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TaskItModel.xcdatamodel; sourceTree = "<group>"; };
 		11D837051A7CD1AF000C189D /* TaskIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TaskIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		11D837091A7CD1AF000C189D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		11D8370A1A7CD1AF000C189D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -89,12 +91,13 @@
 			children = (
 				11D8370A1A7CD1AF000C189D /* AppDelegate.swift */,
 				11D8370C1A7CD1AF000C189D /* ViewController.swift */,
+				11D8370E1A7CD1AF000C189D /* Main.storyboard */,
 				11A4688C1A7F43D200537835 /* AddTaskViewController.swift */,
 				111E92FD1A7CEF2300B79CC0 /* TaskDetailViewController.swift */,
-				11D8370E1A7CD1AF000C189D /* Main.storyboard */,
 				111E92F91A7CE18F00B79CC0 /* TaskCell.swift */,
 				111E92FB1A7CEC9800B79CC0 /* TaskModel.swift */,
 				118F27891A7CFED500693884 /* Date.swift */,
+				11D493E91A80DFDA00341E7D /* TaskItModel.xcdatamodeld */,
 				11D837111A7CD1AF000C189D /* Images.xcassets */,
 				11D837131A7CD1AF000C189D /* LaunchScreen.xib */,
 				11D837081A7CD1AF000C189D /* Supporting Files */,
@@ -228,6 +231,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				11D8370D1A7CD1AF000C189D /* ViewController.swift in Sources */,
+				11D493EB1A80DFDA00341E7D /* TaskItModel.xcdatamodeld in Sources */,
 				118F278A1A7CFED500693884 /* Date.swift in Sources */,
 				111E92FA1A7CE18F00B79CC0 /* TaskCell.swift in Sources */,
 				111E92FC1A7CEC9800B79CC0 /* TaskModel.swift in Sources */,
@@ -439,6 +443,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		11D493E91A80DFDA00341E7D /* TaskItModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				11D493EA1A80DFDA00341E7D /* TaskItModel.xcdatamodel */,
+			);
+			currentVersion = 11D493EA1A80DFDA00341E7D /* TaskItModel.xcdatamodel */;
+			path = TaskItModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 11D836FD1A7CD1AF000C189D /* Project object */;
 }

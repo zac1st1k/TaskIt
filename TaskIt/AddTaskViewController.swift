@@ -10,16 +10,12 @@ import UIKit
 import CoreData
 
 class AddTaskViewController: UIViewController {
-    
-//    var mainVC: ViewController!
 
     @IBOutlet weak var taskTextField: UITextField!
     @IBOutlet weak var subtaskTextField: UITextField!
     @IBOutlet weak var datePicker: UIDatePicker!
     
     @IBAction func saveBarButtonItemPressed(sender: UIBarButtonItem) {
-//        var task = TaskModel(task: taskTextField.text, subtask: subtaskTextField.text, date: datePicker.date, isCompleted: false)
-//        mainVC.baseArray[0].append(task)
         let appDelegate = (UIApplication.sharedApplication().delegate as AppDelegate)
         let entityDescription = NSEntityDescription.entityForName("TaskModel", inManagedObjectContext: appDelegate.managedObjectContext!)
         let task = TaskModel(entity: entityDescription!, insertIntoManagedObjectContext: appDelegate.managedObjectContext)
