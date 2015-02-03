@@ -10,18 +10,18 @@ import UIKit
 
 class TaskDetailViewController: UIViewController {
     
-    var mainVC: ViewController!
+//    var mainVC: ViewController!
     
     @IBOutlet weak var taskLabel: UITextField!
     @IBOutlet weak var descriptionLabel: UITextField!
     @IBOutlet weak var datePicker: UIDatePicker!
-    var taskModel:TaskModel = TaskModel(task: "", subTask: "", date: NSDate(), isCompleted: false)
+    var taskModel:TaskModel = TaskModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         taskLabel.text = taskModel.task
-        descriptionLabel.text = taskModel.subTask
+        descriptionLabel.text = taskModel.subtask
         datePicker.date = taskModel.date
     }
     
@@ -33,7 +33,7 @@ class TaskDetailViewController: UIViewController {
         navigationController?.popViewControllerAnimated(true)
     }
     @IBAction func doneBarButtonItemPressed(sender: UIBarButtonItem) {
-        var task = TaskModel(task: taskLabel.text, subTask: descriptionLabel.text, date: datePicker.date, isCompleted: false)
+//        var task = TaskModel(task: taskLabel.text, subtask: descriptionLabel.text, date: datePicker.date, isCompleted: false)
         mainVC.baseArray[0][mainVC.tableView.indexPathForSelectedRow()!.row] = task
         navigationController?.popViewControllerAnimated(true)
 
