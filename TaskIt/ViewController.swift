@@ -86,6 +86,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         if baseArray[indexPath.section][indexPath.row].isCompleted == true {
             cell.accessoryType = UITableViewCellAccessoryType.Checkmark
         }
+        else {
+            cell.accessoryType = UITableViewCellAccessoryType.None
+        }
+        
         return cell
     }
     func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
