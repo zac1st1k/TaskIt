@@ -75,10 +75,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if fetchedResultsController.sections!.count == 2 {
-            var sectionInfo = fetchedResultsController.sections![0].name
-            println(fetchedResultsController.sections![0].name)
-            println(fetchedResultsController.sections![1].name)
-
             if section == 0 {
                 return "To Do Tasks"
             }
@@ -86,13 +82,23 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 return "Completed Tasks"
             }
         }
-        var sectionInfo = fetchedResultsController.sections![0].name
-        if sectionInfo == "0" {
-            return "To Do Tasks"
-        }
         else {
+            if fetchedResultsController.fetchedObjects![0].isCompleted == false {
+                return "To Do Tasks"
+            }
+            else {
                 return "Completed Tasks"
+            }
+            
         }
+        
+//        var sectionInfo = fetchedResultsController.sections![0].name
+//        if sectionInfo == "0" {
+//            return "To Do Tasks"
+//        }
+//        else {
+//                return "Completed Tasks"
+//        }
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -106,14 +112,22 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(tableView: UITableView, titleForDeleteConfirmationButtonForRowAtIndexPath indexPath: NSIndexPath) -> String! {
-        if indexPath.section == 0 {
+        if fetchedResultsController.sections!.count == 2 {
+            if indexPath.section == 0 {
+                return "Mark as Completed"
+            }
+            else {
+                return "Mark as Uncompleted"
+            }
+        }
+        else if fetchedResultsController.fetchedObjects![0].isCompleted == false {
             return "Mark as Completed"
         }
         else {
             return "Mark as Uncompleted"
         }
     }
-    
+
     func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {
         println("AccessoryButtonTapped")
     }
