@@ -33,7 +33,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         if NSUserDefaults.standardUserDefaults().boolForKey("loadOnce") == false {
             NSUserDefaults.standardUserDefaults().setBool(true, forKey: "loadOnce")
             NSUserDefaults.standardUserDefaults().setBool(false, forKey: "isCapitalized")
-            NSUserDefaults.standardUserDefaults().setBool(false, forKey: "isCompleteNew")
+            NSUserDefaults.standardUserDefaults().setBool(false, forKey: "isCompleted")
             NSUserDefaults.standardUserDefaults().synchronize()
         }
     }
@@ -63,7 +63,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         if tableView == capitalizedTableView {
             var capitalizeCell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier("capitalizedCell", forIndexPath: indexPath) as UITableViewCell
             if indexPath.row == 0 {
-                capitalizeCell.textLabel?.text = "No Do not capitalize"
+                capitalizeCell.textLabel?.text = "Do Not capitalize"
                 if NSUserDefaults.standardUserDefaults().boolForKey("isCapitalized") == false {
                     capitalizeCell.accessoryType = UITableViewCellAccessoryType.Checkmark
                 }
@@ -72,7 +72,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                 }
             }
             else {
-                capitalizeCell.textLabel?.text = "Yes Capitalized!"
+                capitalizeCell.textLabel?.text = "Yes, Capitalize!"
                 if NSUserDefaults.standardUserDefaults().boolForKey("isCapitalized") == true {
                     capitalizeCell.accessoryType = UITableViewCellAccessoryType.Checkmark
                 }
@@ -84,8 +84,8 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         } else {
             var cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier("completeNewTodoCell") as UITableViewCell
             if indexPath.row == 0 {
-                cell.textLabel?.text = "Do not complete Task"
-                if NSUserDefaults.standardUserDefaults().boolForKey("isCompleteNew") == false {
+                cell.textLabel?.text = "Do Not Complete New Task"
+                if NSUserDefaults.standardUserDefaults().boolForKey("isCompleted") == false {
                     cell.accessoryType = UITableViewCellAccessoryType.Checkmark
                 }
                 else {
@@ -93,8 +93,8 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                 }
             }
             else {
-                cell.textLabel?.text = "Complete Task"
-                if NSUserDefaults.standardUserDefaults().boolForKey("isCompleteNew") == true{
+                cell.textLabel?.text = "Yes, Complete Task"
+                if NSUserDefaults.standardUserDefaults().boolForKey("isCompleted") == true{
                     cell.accessoryType = UITableViewCellAccessoryType.Checkmark
                 }
                 else {
@@ -125,10 +125,10 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         }
         else {
             if indexPath.row == 0 {
-                NSUserDefaults.standardUserDefaults().setBool(false, forKey: "isCompleteNew")
+                NSUserDefaults.standardUserDefaults().setBool(false, forKey: "isCompleted")
             }
             else {
-                NSUserDefaults.standardUserDefaults().setBool(true, forKey: "isCompleteNew")
+                NSUserDefaults.standardUserDefaults().setBool(true, forKey: "isCompleted")
             }
         }
         NSUserDefaults.standardUserDefaults().synchronize()

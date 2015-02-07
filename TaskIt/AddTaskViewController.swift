@@ -19,10 +19,19 @@ class AddTaskViewController: UIViewController {
         let appDelegate = (UIApplication.sharedApplication().delegate as AppDelegate)
         let entityDescription = NSEntityDescription.entityForName("TaskModel", inManagedObjectContext: appDelegate.managedObjectContext!)
         let task = TaskModel(entity: entityDescription!, insertIntoManagedObjectContext: appDelegate.managedObjectContext)
-        task.task = taskTextField.text
-        task.subtask = subtaskTextField.text
+        if NSUserDefaults.standardUserDefaults().boolForKey("isCapitalized") == true {
+            task.task = taskTextField.text.capitalizedString
+        } else {
+            task.task = taskTextField.text
+        }
+        if NSUserDefaults.standardUserDefaults().boolForKey("isCompleted") == true {
+            task.isCompleted = true
+        }
+        else {
+            task.isCompleted = false
+        }
         task.date = datePicker.date
-        task.isCompleted = false
+        task.subtask = subtaskTextField.text
         appDelegate.saveContext()
         
         var request = NSFetchRequest(entityName: "TaskModel")
