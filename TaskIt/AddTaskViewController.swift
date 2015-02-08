@@ -24,7 +24,8 @@ class AddTaskViewController: UIViewController, TaskDetailViewControllerDelegate 
     
     @IBAction func saveBarButtonItemPressed(sender: UIBarButtonItem) {
         let appDelegate = (UIApplication.sharedApplication().delegate as AppDelegate)
-        let entityDescription = NSEntityDescription.entityForName("TaskModel", inManagedObjectContext: appDelegate.managedObjectContext!)
+        let managedObjectContext = ModelManager.instance.managedObjectContext
+        let entityDescription = NSEntityDescription.entityForName("TaskModel", inManagedObjectContext: managedObjectContext!)
         let task = TaskModel(entity: entityDescription!, insertIntoManagedObjectContext: appDelegate.managedObjectContext)
         if NSUserDefaults.standardUserDefaults().boolForKey("isCapitalized") == true {
             task.task = taskTextField.text.capitalizedString
@@ -39,7 +40,8 @@ class AddTaskViewController: UIViewController, TaskDetailViewControllerDelegate 
         }
         task.date = datePicker.date
         task.subtask = subtaskTextField.text
-        appDelegate.saveContext()
+//        appDelegate.saveContext()
+        ModelManager.instance.saveContext()
         
         var request = NSFetchRequest(entityName: "TaskModel")
         var error:NSError? = nil
