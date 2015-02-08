@@ -9,36 +9,50 @@
 import UIKit
 import CoreData
 
-class AddTaskViewController: UIViewController {
-    
-    var mainVC: ViewController!
+protocol AddTaskViewControllerDelegate {
+    func addTask(message: String)
+    func addTaskCanceled(message: String)
+}
+
+class AddTaskViewController: UIViewController, TaskDetailViewControllerDelegate {
 
     @IBOutlet weak var taskTextField: UITextField!
     @IBOutlet weak var subtaskTextField: UITextField!
     @IBOutlet weak var datePicker: UIDatePicker!
     
+    var delegate:AddTaskViewControllerDelegate?
+    
     @IBAction func saveBarButtonItemPressed(sender: UIBarButtonItem) {
-        var task = TaskModel(task: taskTextField.text, subTask: subtaskTextField.text, date: datePicker.date, isCompleted: false)
-        mainVC.baseArray[0].append(task)
-//        let appDelegate = (UIApplication.sharedApplication().delegate as AppDelegate)
-//        let entityDescription = NSEntityDescription.entityForName("TaskModel", inManagedObjectContext: appDelegate.managedObjectContext!)
-//        let task = TaskModel(entity: entityDescription!, insertIntoManagedObjectContext: appDelegate.managedObjectContext)
-        task.task = taskTextField.text
-        task.subTask = subtaskTextField.text
+        let appDelegate = (UIApplication.sharedApplication().delegate as AppDelegate)
+        let entityDescription = NSEntityDescription.entityForName("TaskModel", inManagedObjectContext: appDelegate.managedObjectContext!)
+        let task = TaskModel(entity: entityDescription!, insertIntoManagedObjectContext: appDelegate.managedObjectContext)
+        if NSUserDefaults.standardUserDefaults().boolForKey("isCapitalized") == true {
+            task.task = taskTextField.text.capitalizedString
+        } else {
+            task.task = taskTextField.text
+        }
+        if NSUserDefaults.standardUserDefaults().boolForKey("isCompleted") == true {
+            task.isCompleted = true
+        }
+        else {
+            task.isCompleted = false
+        }
         task.date = datePicker.date
-        task.isCompleted = false
-//        appDelegate.saveContext()
+        task.subtask = subtaskTextField.text
+        appDelegate.saveContext()
         
-//        var request = NSFetchRequest(entityName: "TaskModel")
-//        var error:NSError? = nil
-//        var results:NSArray = appDelegate.managedObjectContext!.executeFetchRequest(request, error: &error)!
-//        for n in results {
-//            println(n)
-//        }
-        
+        var request = NSFetchRequest(entityName: "TaskModel")
+        var error:NSError? = nil
+        var results:NSArray = appDelegate.managedObjectContext!.executeFetchRequest(request, error: &error)!
+        for n in results {
+            println(n)
+            
+        }
         dismissViewControllerAnimated(true, completion: nil)
+        delegate?.addTask("Task Added")
     }
     @IBAction func cancelBarButtonItemPressed(sender: UIBarButtonItem) {
         dismissViewControllerAnimated(true, completion: nil)
+        delegate?.addTaskCanceled("Task Was Not Added")
     }
 }
