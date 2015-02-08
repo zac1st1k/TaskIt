@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate, TaskDetailViewControllerDelegate {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate, TaskDetailViewControllerDelegate, AddTaskViewControllerDelegate{
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -45,6 +45,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
         else if segue.identifier == "showTaskAdd" {
             let addTaskVC:AddTaskViewController = segue.destinationViewController as AddTaskViewController
+            addTaskVC.delegate = self
         }
     }
     
@@ -132,10 +133,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {
         println("AccessoryButtonTapped")
     }
-    
-    @IBAction func addTaskBarButtonItemPressed(sender: UIBarButtonItem) {
-        self.performSegueWithIdentifier("showTaskAdd", sender: self)
-    }
+
     //Helper
     func taskFetchRequest() -> NSFetchRequest {
         let fetcheRequest = NSFetchRequest(entityName: "TaskModel")
@@ -157,6 +155,24 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     //MARK: - TaskDetailViewController Delegate
     func taskDetailEdited() {
         println("Task Detail Edited")
+    }
+    //MARK: - AddTaskViewController Delegate
+    func addTask(message: String) {
+        self.showAlert(message: message)
+    }
+    func addTaskCanceled(message: String) {
+        self.showAlert(message: message)
+    }
+    //MARK: - Helper
+    func showAlert(message: String = "Congratulations!") {
+        var alert = UIAlertController(title: "Change Model!", message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+        presentViewController(alert, animated: true, completion: nil)
+    }
+    //MARK: - IBActions
+    
+    @IBAction func addTaskBarButtonItemPressed(sender: UIBarButtonItem) {
+        self.performSegueWithIdentifier("showTaskAdd", sender: self)
     }
 }
 

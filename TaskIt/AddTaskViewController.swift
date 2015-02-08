@@ -9,11 +9,18 @@
 import UIKit
 import CoreData
 
-class AddTaskViewController: UIViewController {
+protocol AddTaskViewControllerDelegate {
+    func addTask(message: String)
+    func addTaskCanceled(message: String)
+}
+
+class AddTaskViewController: UIViewController, TaskDetailViewControllerDelegate {
 
     @IBOutlet weak var taskTextField: UITextField!
     @IBOutlet weak var subtaskTextField: UITextField!
     @IBOutlet weak var datePicker: UIDatePicker!
+    
+    var delegate:AddTaskViewControllerDelegate?
     
     @IBAction func saveBarButtonItemPressed(sender: UIBarButtonItem) {
         let appDelegate = (UIApplication.sharedApplication().delegate as AppDelegate)
@@ -39,11 +46,13 @@ class AddTaskViewController: UIViewController {
         var results:NSArray = appDelegate.managedObjectContext!.executeFetchRequest(request, error: &error)!
         for n in results {
             println(n)
+            
         }
-        
         dismissViewControllerAnimated(true, completion: nil)
+        delegate?.addTask("Task Added")
     }
     @IBAction func cancelBarButtonItemPressed(sender: UIBarButtonItem) {
         dismissViewControllerAnimated(true, completion: nil)
+        delegate?.addTaskCanceled("Task Was Not Added")
     }
 }
